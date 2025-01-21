@@ -122,12 +122,15 @@ public class Computer : User
         ToArray(copy);
         if (CalculateShanten(tehai_counter) == 0) //役完成
         {
-            Debug.Log("コンピュータの勝ちです（ロン）");
-            game_end_flag = true;
-            tehai.Add(kawa.Last());
-            CalculateScore();
-            Debug.Log("コンピュータのスコア" + totalscore);
-            Application.Quit();
+            if(game_end_flag == false)
+            {
+                Debug.Log("コンピュータの勝ちです（ロン）");
+                game_end_flag = true;
+                tehai.Add(kawa.Last());
+                CalculateScore();
+                Debug.Log("コンピュータのスコア" + totalscore);
+                Application.Quit();
+            }
         }
     }
 
@@ -135,11 +138,14 @@ public class Computer : User
     {
         if(Judge(tehai) == true)
         {
-            Debug.Log("コンピュータの勝ちです（ツモ）");
-            game_end_flag = true;
-            CalculateScore();
-            Debug.Log("コンピュータのスコア" + totalscore);
-            Application.Quit();
+            if(game_end_flag == false)
+            {
+                Debug.Log("コンピュータの勝ちです（ツモ）");
+                game_end_flag = true;
+                CalculateScore();
+                Debug.Log("コンピュータのスコア" + totalscore);
+                Application.Quit();
+            }
         }
         else
         {

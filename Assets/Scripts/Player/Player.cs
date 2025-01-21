@@ -6,12 +6,13 @@ using UnityEngine;
 public class Player : User
 {
     public Computer computer;
+    public PlayerScore playerscore;
     public bool player_pai_get = false;
     public int target_number; //マウスでクリックした牌
     public bool click_flag = false;
     public bool game_end_flag = false;
     public bool trushed = false;
-    public int totalscore = 0;
+    //public int totalscore = 0;
 
     public bool dev_mode = false; //開発者モード
 
@@ -77,12 +78,15 @@ public class Player : User
         ToArray(copy);
         if (CalculateMentsu(tehai_counter) == 4) //役完成
         {
-            Debug.Log("プレイヤーの勝ちです（ロン）");
-            game_end_flag = true;
-            tehai.Add(kawa.Last());
-            CalculateScore();
-            Debug.Log("プレイヤーのスコア" + totalscore);
-            Application.Quit();
+            if(game_end_flag == false)
+            {
+                Debug.Log("プレイヤーの勝ちです（ロン）");
+                game_end_flag = true;
+                tehai.Add(kawa.Last());
+                CalculateScore();
+                Debug.Log("プレイヤーのスコア" + playerscore.totalscore);
+                Application.Quit();
+            }
         }
     }
 
@@ -90,11 +94,14 @@ public class Player : User
     {
         if(Judge(tehai) == true)
         {
-            Debug.Log("プレイヤーの勝ちです（ツモ）");
-            game_end_flag = true;
-            CalculateScore();
-            Debug.Log("プレイヤーのスコア" + totalscore);
-            Application.Quit();
+            if(game_end_flag == false)
+            {
+                Debug.Log("プレイヤーの勝ちです（ツモ）");
+                game_end_flag = true;
+                CalculateScore();
+                Debug.Log("プレイヤーのスコア" + playerscore.totalscore);
+                Application.Quit();
+            }
 
         }
         else //交換処理
@@ -141,7 +148,7 @@ public class Player : User
             {
                 if (tehai[i] == j + "m")
                 {
-                    totalscore += j;
+                    playerscore.totalscore += j;
                 }
             }
             //乙
@@ -149,7 +156,7 @@ public class Player : User
             {
                 if (tehai[i] == j + "p")
                 {
-                    totalscore += j;
+                    playerscore.totalscore += j;
                 }
             }
             //丙
@@ -157,21 +164,21 @@ public class Player : User
             {
                 if (tehai[i] == j + "s")
                 {
-                    totalscore += j;
+                    playerscore.totalscore += j;
                 }
             }
             //字牌
             if (tehai[i] == 9 + "x")
             {
-                totalscore += 10;
+                playerscore.totalscore += 10;
             }
             if (tehai[i] == 9 + "y")
             {
-                totalscore += 10;
+                playerscore.totalscore += 10;
             }
             if (tehai[i] == 9 + "z")
             {
-                totalscore += 10;
+                playerscore.totalscore += 10;
             }
         }
     }
