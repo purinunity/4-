@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public Computer computer;
     public GameObject player_pai_get;
     public GameObject computer_pai_get;
-    public int draw_count = 86;
+    public int draw_count = 98;
 
     private bool next_move = false;
 
